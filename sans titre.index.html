@@ -13,6 +13,7 @@
       --gold: #ffd700;
       --text: #f0f0f5;
       --radius: 20px;
+      --shadow: 0 8px 20px rgba(0,0,0,0.5);
     }
     * {
       margin: 0;
@@ -24,7 +25,7 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding: 20px;
+      padding: 15px;
     }
     .container {
       max-width: 800px;
@@ -34,16 +35,27 @@
       text-align: center;
       padding: 20px 0;
       border-bottom: 2px solid var(--primary);
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+      position: relative;
     }
-    h1 {
+    .logo {
       font-size: 2.2rem;
       color: var(--gold);
+      font-weight: 700;
+    }
+    .points-badge {
+      background: var(--primary);
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 30px;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1rem;
     }
     .nav {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 12px;
       flex-wrap: wrap;
       margin: 20px 0;
     }
@@ -56,19 +68,38 @@
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 6px 12px rgba(138, 43, 226, 0.4);
-      transition: transform 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
+      min-width: 120px;
+      font-size: 0.95rem;
     }
     .btn:hover {
       transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(138, 43, 226, 0.6);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      box-shadow: none;
+    }
+    .btn-outline:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 240, 255, 0.3);
     }
     .card {
       background: var(--card);
       padding: 25px;
       border-radius: var(--radius);
       margin: 20px 0;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      box-shadow: var(--shadow);
     }
-    input, textarea {
+    .card h2 {
+      color: var(--gold);
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.6rem;
+    }
+    input, textarea, select {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
@@ -76,20 +107,40 @@
       border: 1px solid #333;
       background: #252530;
       color: white;
+      font-family: 'Cairo', sans-serif;
     }
-    .points {
-      background: var(--primary);
-      display: inline-block;
-      padding: 8px 16px;
-      border-radius: 30px;
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    .payment-option {
+      background: rgba(138, 43, 226, 0.1);
+      padding: 12px;
+      border-radius: 12px;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+    .notification {
+      background: var(--accent);
+      color: #000;
+      padding: 12px;
+      border-radius: var(--radius);
       margin: 15px 0;
+      text-align: center;
       font-weight: bold;
     }
     footer {
       text-align: center;
-      margin-top: 40px;
+      margin-top: 30px;
+      padding: 20px;
       color: #aaa;
       font-size: 0.9rem;
+      border-top: 1px solid #333;
+    }
+    @media (max-width: 600px) {
+      .btn { padding: 10px 15px; font-size: 0.9rem; }
+      .logo { font-size: 1.8rem; }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
@@ -97,36 +148,103 @@
 <body>
   <div class="container">
     <header>
-      <h1>تونس جيمز ماركت</h1>
-      <div class="points">🎯 0 نقطة</div>
+      <div class="logo">تونس جيمز ماركت</div>
+      <div class="points-badge">🎯 0 نقطة</div>
     </header>
 
     <div class="nav">
-      <button class="btn">نشر حساب</button>
-      <button class="btn">شحن فري فاير</button>
-      <button class="btn">تحويل بطاقات</button>
-      <button class="btn">المتجر</button>
+      <button class="btn" onclick="showSection('publish')">نشر حساب</button>
+      <button class="btn" onclick="showSection('topup')">شحن فري فاير</button>
+      <button class="btn" onclick="showSection('convert')">تحويل بطاقات</button>
+      <button class="btn" onclick="showSection('shop')">المتجر</button>
     </div>
 
-    <div class="card">
+    <div id="publish" class="card">
       <h2>نشر حساب للبيع</h2>
-      <input type="text" placeholder="اسم الحساب" />
+      <input type="text" placeholder="اسم الحساب (مثال: حساب فري فاير VIP)" />
       <input type="text" placeholder="رقم التواصل أو الواتساب" />
-      <textarea placeholder="وصف الحساب"></textarea>
-      <button class="btn">رفع صورة</button>
-      <button class="btn">نشر المنشور (1 دينار)</button>
+      <textarea placeholder="وصف الحساب (المستوى، الجواهر، إلخ...)"></textarea>
+      <label>رفع صورة الحساب</label>
+      <input type="file" accept="image/*" />
+      
+      <h3>طريقة الدفع (1 دينار)</h3>
+      <div class="payment-option">
+        <strong>أوريديو</strong>: أرسل 1 دينار إلى الرقم: <code>46625630</code>
+      </div>
+      <div class="payment-option">
+        <strong>أورانج</strong>: أرسل 1 دينار إلى الرقم: <code>52897520</code>
+      </div>
+      <div class="payment-option">
+        <strong>تيك تيليكوم</strong>: اختر العرض وادخل رقم البطاقة
+      </div>
+      
+      <label>رفع صورة رسالة التأكيد</label>
+      <input type="file" accept="image/*" />
+      
+      <button class="btn">نشر المنشور</button>
+      <div class="notification">ملاحظة: المنشور يُحذف تلقائيًا بعد 48 ساعة.</div>
     </div>
 
-    <div class="card">
+    <div id="topup" class="card" style="display:none;">
       <h2>شحن فري فاير</h2>
-      <p>اختر الكمية:</p>
       <button class="btn">530 جوهرة - 20 دينار</button>
       <button class="btn">1080 جوهرة - 40 دينار</button>
+      <button class="btn">العضوية الأسبوعية - 12 دينار</button>
+      <button class="btn">العضوية الشهرية - 40 دينار</button>
+      <button class="btn">بويا باس - 12 دينار</button>
+      
+      <label>طريقة الدفع</label>
+      <select>
+        <option>اختر طريقة الدفع</option>
+        <option>D17 (أرسل إلى 52897520)</option>
+        <option>بطاقات أوريديو / أورانج / تيك</option>
+      </select>
+      
+      <input type="text" placeholder="ID حساب فري فاير" />
+      <label>رفع صور البطاقات أو رسالة الإرسال</label>
+      <input type="file" accept="image/*" multiple />
+      <button class="btn">إرسال الطلب</button>
+    </div>
+
+    <div id="convert" class="card" style="display:none;">
+      <h2>تحويل بطاقات إلى رصيد D17</h2>
+      <p>الحد الأقصى: 50 دينار | الخصم: 20% (200 مليم لكل دينار)</p>
+      
+      <label>رفع صور البطاقات</label>
+      <input type="file" accept="image/*" multiple />
+      
+      <textarea placeholder="أدخل أرقام البطاقات (كل رقم في سطر)"></textarea>
+      <input type="text" placeholder="رقم D17 الخاص بك" />
+      
+      <button class="btn">إرسال طلب التحويل</button>
+    </div>
+
+    <div id="shop" class="card" style="display:none;">
+      <h2>متجر النقاط</h2>
+      <p>كل منشور = +1 نقطة | كل شحن = +1 نقطة | كل تحويل = +2 نقطة</p>
+      
+      <div class="card" style="background:#252530;">
+        <h3>العروض المتاحة</h3>
+        <p>✅ بويا باس — 25 نقطة</p>
+        <button class="btn" onclick="alert('يجب أن تمتلك 25 نقطة على الأقل!')">استبدال</button>
+      </div>
     </div>
 
     <footer>
-      &copy; 2025 تونس جيمز ماركت — جميع الحقوق محفوظة.
+      &copy; 2025 تونس جيمز ماركت — جميع الحقوق محفوظة.<br>
+      الموقع يعمل بدون اتصال مباشر — جميع الطلبات تُراجع يدويًا من الإدارة.
     </footer>
   </div>
+
+  <script>
+    function showSection(id) {
+      // إخفاء كل الأقسام
+      document.querySelectorAll('.card').forEach(card => {
+        card.style.display = 'none';
+      });
+      // إظهار القسم المطلوب
+      document.getElementById(id).style.display = 'block';
+    }
+  </script>
 </body>
 </html>
