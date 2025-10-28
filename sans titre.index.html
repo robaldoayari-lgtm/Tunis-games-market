@@ -1,19 +1,132 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>تونس جيمز ماركت</title>
   <style>
-    body{background:#0f0f15;color:#f0f0f5;font-family:Cairo,sans-serif;text-align:center;padding:40px}
-    h1{color:#ffd700}
-    .btn{background:#8a2be2;color:white;border:none;padding:12px 24px;border-radius:20px;cursor:pointer;margin:10px;font-size:18px}
-    .btn:hover{transform:scale(1.05)}
+    :root {
+      --bg: #0f0f15;
+      --card: #1a1a22;
+      --primary: #8a2be2;
+      --accent: #00f0ff;
+      --gold: #ffd700;
+      --text: #f0f0f5;
+      --radius: 20px;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      padding: 20px 0;
+      border-bottom: 2px solid var(--primary);
+      margin-bottom: 30px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: var(--gold);
+    }
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    .btn {
+      background: linear-gradient(to bottom, var(--primary), #5a1a9e);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: var(--radius);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(138, 43, 226, 0.4);
+      transition: transform 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+    .card {
+      background: var(--card);
+      padding: 25px;
+      border-radius: var(--radius);
+      margin: 20px 0;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 12px;
+      border: 1px solid #333;
+      background: #252530;
+      color: white;
+    }
+    .points {
+      background: var(--primary);
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 30px;
+      margin: 15px 0;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>مرحباً بك في تونس جيمز ماركت!</h1>
-  <p>الواجهة تعمل ✅</p>
-  <button class="btn">نشر حساب</button>
-  <button class="btn">شحن فري فاير</button>
+  <div class="container">
+    <header>
+      <h1>تونس جيمز ماركت</h1>
+      <div class="points">🎯 0 نقطة</div>
+    </header>
+
+    <div class="nav">
+      <button class="btn">نشر حساب</button>
+      <button class="btn">شحن فري فاير</button>
+      <button class="btn">تحويل بطاقات</button>
+      <button class="btn">المتجر</button>
+    </div>
+
+    <div class="card">
+      <h2>نشر حساب للبيع</h2>
+      <input type="text" placeholder="اسم الحساب" />
+      <input type="text" placeholder="رقم التواصل أو الواتساب" />
+      <textarea placeholder="وصف الحساب"></textarea>
+      <button class="btn">رفع صورة</button>
+      <button class="btn">نشر المنشور (1 دينار)</button>
+    </div>
+
+    <div class="card">
+      <h2>شحن فري فاير</h2>
+      <p>اختر الكمية:</p>
+      <button class="btn">530 جوهرة - 20 دينار</button>
+      <button class="btn">1080 جوهرة - 40 دينار</button>
+    </div>
+
+    <footer>
+      &copy; 2025 تونس جيمز ماركت — جميع الحقوق محفوظة.
+    </footer>
+  </div>
 </body>
-</html>ذ
+</html>
